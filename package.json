@@ -1,0 +1,20 @@
+{
+  "name": "zugtt",
+  "version": "0.0.1",
+  "description": "a control system for a toy train running on a raspberrypi",
+  "main": "app.js",
+  "dependencies": {
+    "express": "^4.13.3",
+    "i2c-bus": "^1.0.1",
+    "morgan": "^1.6.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "traincontrolsystem"
+  ],
+  "author": "Michael Haubenschild",
+  "license": "MIT"
+}
