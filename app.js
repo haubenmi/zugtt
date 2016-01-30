@@ -1,4 +1,23 @@
-var i2c = require('i2c-bus');
+var i2c = {
+  openSync : function() {
+    return {
+      scanSync: function() {
+        console.log("scan sync mock");
+        return [];
+      },
+      writeByteSync: function(module,addr,val) {
+        console.log("Mock call to write [" + module +"] "+addr +":="+val);
+      }
+    }
+  }
+}
+
+try{
+  i2c = require('i2c-bus');
+} catch(err) {
+  console.log("Could not load i2c-bus module.Only creating web server");
+  console.log(err);
+}
 var morgan = require('morgan');
 
 i2c1 = i2c.openSync(1);

@@ -1,0 +1,28 @@
+{
+  "name": "zugtt",
+  "description": "a control system for a toy train running on a raspberrypi",
+  "main": "app.js",
+  "authors": [
+    "Michael Haubenschild"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "traincontrolsystem"
+  ],
+  "homepage": "https://github.com/haubenmi/zugtt",
+  "moduleType": [
+    "node"
+  ],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "~1.4.9",
+    "jquery": "~2.2.0",
+    "bootstrap": "~3.3.6"
+  }
+}
