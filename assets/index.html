@@ -6,7 +6,7 @@
   <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
   <script src="bower_components/angular/angular.js"></script>
   <style>
-  zugtt-switch{
+  zugtt-switch,zugtt-buzzer{
     display: block;
     position: absolute;
     width: 35px;
@@ -37,7 +37,7 @@
     right: 2px;
     top: -10px;
   }
-  zugtt-rail div.active,zugtt-light div.active {
+  .active {
     box-shadow: 0px 0px 17px 2px #FBF77E;
   }
   zugtt-rail div.icon,zugtt-light div.icon {
@@ -132,6 +132,7 @@
 <zugtt-light zugtt-light-channel="58" style="left:600px;top:200px;">L</zugtt-light>
 <zugtt-light zugtt-light-channel="59" style="left:680px;top:200px;">H</zugtt-light>
 
+<zugtt-buzzer zugtt-buzzer-channel="60" style="left:1160px;top:106px;"></zugtt-buzzer>
 </div>
 <script type="text/javascript">
 
@@ -338,6 +339,27 @@ $http.get('/api/toggle/' + idx);
  
   };
 
+})
+.directive('zugttBuzzer',function($http,$timeout) {
+  return {
+    scope: {
+      zugttBuzzerChannel: "="
+    },
+    template: '<div class="zugtt-buzzer" ng-class="{active: activated}">B</div>',
+    link: function(scope,elem) {
+      scope.activated = false;
+        elem.on('click',function(evt) {
+          scope.$apply(function(){
+
+          });
+            $http.get('/api/beep/'+scope.zugttBuzzerChannel);
+            scope.activated = true;
+            $timeout(function(){
+              scope.activated = false;
+            },800);
+        });
+    }
+  };
 });
 
 </script>
