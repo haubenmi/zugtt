@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en" ng-app="zugttApp">
+<head>
+  <meta charset="utf-8">
+  <title>Zugsteuerung - TT</title>
+  <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
+  <script src="bower_components/angular/angular.js"></script>
+  <style>
+  </style>
+</head>
+<body ng-controller="appController">
+<div ng-repeat="port in ports">
+#{{port}}
+<button ng-click="on(port)">on</button>
+<button ng-click="off(port)">off</button>
+<button ng-click="toogle(port)">toogle</button>
+<button ng-click="beep(port)">beep</button>
+</div>
+<script type="text/javascript">
+
+
+var zugttApp = angular.module('zugttApp',[]);
+
+zugttApp.controller('appController', function($scope,$http) {
+
+$scope.ports = [];
+for(var i = 0;i < 64;i++) {
+$scope.ports.push(i);
+}
+
+$scope.on = function(idx) {
+$http.get('/api/on/' + idx);   
+};
+$scope.off = function(idx) {
+$http.get('/api/off/' + idx);   
+};
+$scope.toggle = function(idx) {
+$http.get('/api/toggle/' + idx);   
+  };
+  $scope.beep = function(idx) {
+    $http.get('/api/beep/' + idx);   
+  };
+
+
+});
+
+</script>
+</body>
+</html>
