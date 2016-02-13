@@ -31,7 +31,7 @@ app.use(morgan("dev"));
  // res.sendFile(__dirname + '/assets/index.html');
 //});
 
-var serverPort = 80;
+var serverPort = 8080;
 var portsPerModule = 16;
 var portsPerRow = 8;
 var iodirPorts = [0x00,0x01];
@@ -52,8 +52,8 @@ for(var i in modules) {
    i2c1.writeByteSync(modules[i],iodirPorts[r],0x00);
   }
   for(var gpio in gpioPorts) {
-    registers[i][gpio] = 0x00;
-    i2c1.writeByteSync(modules[i],gpioPorts[gpio],0x00);
+    registers[i][gpio] = 0xFF;
+    i2c1.writeByteSync(modules[i],gpioPorts[gpio],0xFF);
   }
 }
 console.log(registers);
@@ -70,8 +70,9 @@ function setBit(org,digit,val) {
   if(val === false) {
     b = ~b;
     return a & b;
+  } else {
+    return a | b;
   }
-  return a | b;
 };
 function getBit(org,digit) {
   if(digit < 0 || digit > 7) {
@@ -129,10 +130,10 @@ function turnPort(regs,port,val) {
 
 };
 function turnPortOn(regs,port) {
-  turnPort(regs,port,true);
+  turnPort(regs,port,false);
 }
 function turnPortOff(regs,port) {
-  turnPort(regs,port,false);
+  turnPort(regs,port,true);
 }
 app.get('/api/on/:port',function(req,res) {
   turnPortOn(registers,req.params.port);	

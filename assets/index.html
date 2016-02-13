@@ -245,7 +245,9 @@ $http.get('/api/toggle/' + idx);
       
       scope.red = function() {
         $http.get('/api/on/' + scope.zugttRedChannel);
-        $http.get('/api/off/' + scope.zugttGreenChannel);
+        if(scope.maxState > 2) {
+          $http.get('/api/off/' + scope.zugttGreenChannel);
+        }
         if(scope.maxState == 5) {
           $http.get('/api/on/' + scope.zugttRedTwoChannel);
           $http.get('/api/off/' + scope.zugttYellowChannel);
@@ -277,8 +279,10 @@ $http.get('/api/toggle/' + idx);
         $http.get('/api/on/' + scope.zugttWhiteChannel);
       };
       scope.off = function() {
-        $http.get('/api/off/' + scope.zugttGreenChannel);
         $http.get('/api/off/' + scope.zugttRedChannel);
+        if(scope.maxState > 2) {
+          $http.get('/api/off/' + scope.zugttGreenChannel);
+        }
         if(scope.maxState == 5) {
           $http.get('/api/off/' + scope.zugttRedTwoChannel);
           $http.get('/api/off/' + scope.zugttYellowChannel);
@@ -306,6 +310,7 @@ $http.get('/api/toggle/' + idx);
             break;
         }
       });
+      scope.off();
     }
 };
 
