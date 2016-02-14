@@ -38,7 +38,7 @@ var iodirPorts = [0x00,0x01];
 var gpioPorts = [0x14,0x15];
 var modules = [0x20,0x21,0x22,0x23];
 var registers = {};
-var beepLength = 800;
+var beepLength = 300;
 
 modules = i2c1.scanSync();
 console.log(modules);
