@@ -13,7 +13,7 @@
 #{{port}}
 <button ng-click="on(port)">on</button>
 <button ng-click="off(port)">off</button>
-<button ng-click="toogle(port)">toogle</button>
+<button ng-click="toggle(port)">toogle</button>
 <button ng-click="beep(port)">beep</button>
 </div>
 <script type="text/javascript">
@@ -24,7 +24,7 @@ var zugttApp = angular.module('zugttApp',[]);
 zugttApp.controller('appController', function($scope,$http) {
 
 $scope.ports = [];
-for(var i = 0;i < 64;i++) {
+for(var i = 0;i < 80;i++) {
 $scope.ports.push(i);
 }
 
