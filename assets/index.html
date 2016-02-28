@@ -95,7 +95,7 @@
 <zugtt-switch zugtt-straight-channel="40" zugtt-bent-channel="41" style="left:825px;top:610px;">3</zugtt-switch>
 <zugtt-switch zugtt-straight-channel="46" zugtt-bent-channel="45" style="left:1200px;top:360px;">4</zugtt-switch>
 <zugtt-switch zugtt-straight-channel="42" zugtt-bent-channel="7" style="left:1254px;top:330px;">5</zugtt-switch>
-<zugtt-switch zugtt-straight-channel="18" zugtt-bent-channel="16" style="left:1310px;top:250px;">6</zugtt-switch>
+<zugtt-switch zugtt-straight-channel="17" zugtt-bent-channel="16" style="left:1310px;top:250px;">6</zugtt-switch>
 <zugtt-switch zugtt-straight-channel="10" zugtt-bent-channel="11" style="left:705px;top:670px;">10</zugtt-switch>
 <zugtt-switch zugtt-straight-channel="29" zugtt-bent-channel="28" style="left:600px;top:710px;">11</zugtt-switch>
 <zugtt-switch zugtt-straight-channel="26" zugtt-bent-channel="27" style="left:470px;top:670px;">12</zugtt-switch>
@@ -132,7 +132,7 @@
 <zugtt-signal zugtt-red-channel="39" zugtt-green-channel="38" style="left:940px;top:295px;"></zugtt-signal><!-- S9 -->
 <zugtt-signal zugtt-red-channel="55" style="left:1210px;top:680px;"></zugtt-signal>
 
-<zugtt-signal zugtt-red-channel="23" zugtt-red-two-channel="22" zugtt-green-channel="20" zugtt-yellow-channel="17" zugtt-white-channel="21" style="left:1278px;top:305px"></zugtt-signal>
+<zugtt-signal zugtt-red-channel="23" zugtt-red-two-channel="22" zugtt-green-channel="20" zugtt-yellow-channel="18" zugtt-white-channel="21" style="left:1278px;top:305px"></zugtt-signal>
 
 <zugtt-signal zugtt-red-channel="0" zugtt-green-channel="1" style="left:1352px;top:495px;"></zugtt-signal>
 <zugtt-signal zugtt-red-channel="51" zugtt-green-channel="50" style="left:1372px;top:495px;"></zugtt-signal>
@@ -361,15 +361,17 @@ $http.get('/api/toggle/' + idx);
     template: '<div class="zugtt-buzzer" ng-class="{active: activated}">B</div>',
     link: function(scope,elem) {
       scope.activated = false;
-        elem.on('click',function(evt) {
+        elem.on('mousedown',function(evt) {
           scope.$apply(function(){
-
-          });
-            $http.get('/api/beep/'+scope.zugttBuzzerChannel);
+            $http.get('/api/on/'+scope.zugttBuzzerChannel);
             scope.activated = true;
-            $timeout(function(){
-              scope.activated = false;
-            },800);
+          });
+        });
+        angular.element(document).on('mouseup',function(evt) {
+          scope.$apply(function() {
+            $http.get('/api/off/'+scope.zugttBuzzerChannel);
+            scope.activated = false;
+          });
         });
     }
   };
